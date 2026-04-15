@@ -238,18 +238,17 @@ if __name__ == "__main__":
     )
 
     # Simulate a flaky function
-    call_count = 0
+    _counter = {"count": 0}
 
     def flaky_function(x):
-        nonlocal call_count
-        call_count += 1
-        if call_count < 3:
+        _counter["count"] += 1
+        if _counter["count"] < 3:
             raise ConnectionError("Connection refused")
         return x * 2
 
     result, error = handler.handle(flaky_function, 5)
     print(f"Result: {result}, Error: {error}")
-    print(f"Function called {call_count} times")
+    print(f"Function called {_counter['count']} times")
 
     # Simulate a permanent failure
     def failing_function():
