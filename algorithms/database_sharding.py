@@ -67,7 +67,7 @@ class ConsistentHashRouter:
 
     @staticmethod
     def _hash(key):
-        return int(hashlib.md5(str(key).encode()).hexdigest(), 16)
+        return int(hashlib.sha256(str(key).encode()).hexdigest(), 16)
 
     def get_shard(self, user_id):
         """Get shard ID for a given user ID."""
